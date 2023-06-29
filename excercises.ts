@@ -62,8 +62,21 @@ const square = (n: number[], s: number): number[] => {
   let newArr: number[] = [];
   for (let i = 0; i < n.length; i++) {
     const squareI = n[i] * n[i];
-    squareI < max ? newArr.push(squareI) : "";
+    squareI <= max ? newArr.push(squareI) : "";
   }
+
+  const count = new Array(max + 1).fill(0);
+  for (let i = 0; i < newArr.length; i++) {
+    count[newArr[i]]++;
+  }
+
+  const sortedArr: number[] = [];
+  for (let i = 0; i < count.length; i++) {
+    for (let j = 0; j < count[i]; j++) {
+      sortedArr.push(i);
+    }
+  }
+  return sortedArr;
 };
 
-console.log(square([-6, -5, 0, 5, 6], 6));
+console.log(square([1, 2, 3, 5, 6, 8, 9], s));
