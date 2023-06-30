@@ -5,16 +5,21 @@
 const s = 2;
 
 const filter = (n: number[], s: number): void => {
-  let restult = n.toLocaleString().split("");
   let arr: number[] = [];
 
   // iterates over the n array, removes digits that are equal or grater that s
-  for (let i = 0; i < restult.length; i++) {
-    if (parseInt(restult[i]) < s) {
-      arr.push(parseInt(restult[i]));
+  for (let i = 0; i < n.length; i++) {
+    let str = n[i].toLocaleString();
+    let tmp = "";
+    for (let j = 0; j < str.length; j++) {
+      if (parseInt(str[j]) < s) {
+        tmp += str[j];
+      }
+    }
+    if (tmp) {
+      arr.push(parseInt(tmp));
     }
   }
-
   // creates histogram with the number of repetitions in each index
   let count = new Array(s).fill(0);
   for (let i = 0; i < arr.length; i++) {
@@ -67,7 +72,15 @@ console.log(square([1, 2, 3, 5, 6, 8, 9], s));
 
 const change = (coins: number[]): any => {
   coins = coins.sort((a, b) => a - b);
-  return coins;
+  let change = 1;
+  for (let i = 0; i < coins.length; i++) {
+    if (coins[i] > change) {
+      break;
+    } else {
+      change += coins[i];
+    }
+  }
+  return change;
 };
 
 console.log(change([5, 7, 1, 1, 2, 3, 22]));
