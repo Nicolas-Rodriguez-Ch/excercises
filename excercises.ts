@@ -1,8 +1,7 @@
 // My hash c251364c07de0d8a3b38a69fb5a22f1f, s = 2
 
-// 1. Code challenge one
-
 const s = 2;
+// 1. Code challenge one
 
 const filter = (n: number[], s: number): void => {
   let arr: number[] = [];
@@ -20,20 +19,13 @@ const filter = (n: number[], s: number): void => {
       arr.push(parseInt(tmp));
     }
   }
-  // creates histogram with the number of repetitions in each index
-  let count = new Array(s).fill(0);
-  for (let i = 0; i < arr.length; i++) {
-    count[arr[i]]++;
-  }
 
-  // creates a new array in descending order
-  let sortedArr: number[] = [];
-  for (let i = count.length - 1; i >= 0; i--) {
-    for (let j = 0; j < count[i]; j++) {
-      sortedArr.push(i);
-    }
+  // reverses the array
+  let result = new Array(arr.length);
+  for (let i = 0; i < result.length; i++) {
+    result[i] = arr[arr.length - 1 - i];
   }
-  console.log(sortedArr);
+  console.log(result);
 };
 
 filter([60, 6, 5, 4, 3, 2, 7, 7, 29, 1], s);
@@ -47,7 +39,9 @@ const square = (n: number[], s: number): number[] => {
   // squares the value of the number and then checks if it goes over the max
   for (let i = 0; i < n.length; i++) {
     const squareI = n[i] * n[i];
-    squareI <= max ? newArr.push(squareI) : "";
+    if (squareI <= max) {
+      newArr.push(squareI);
+    }
   }
 
   // creates histogram with the number of repetitions in each index
@@ -70,7 +64,7 @@ console.log(square([1, 2, 3, 5, 6, 8, 9], s));
 
 // 3. Code challenge three
 
-const change = (coins: number[]): any => {
+const change = (coins: number[]): number => {
   coins = coins.sort((a, b) => a - b);
   let change = 1;
   for (let i = 0; i < coins.length; i++) {
