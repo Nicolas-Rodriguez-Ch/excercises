@@ -4,9 +4,9 @@ const s = 2;
 // 1. Code challenge one
 
 const filter = (n: number[], s: number): void => {
-  let arr: number[] = [];
+  let filteredLength = 0;
 
-  // iterates over the n array, removes digits that are equal or grater that s
+  // iterates over the n array, places the numbers lower than s at the begining
   for (let i = 0; i < n.length; i++) {
     let str = n[i].toLocaleString();
     let tmp = "";
@@ -16,16 +16,21 @@ const filter = (n: number[], s: number): void => {
       }
     }
     if (tmp) {
-      arr.push(parseInt(tmp));
+      n[filteredLength] = parseInt(tmp);
+      filteredLength++;
     }
   }
 
+  // trims the array
+  n.length = filteredLength;
+  
   // reverses the array
-  let result = new Array(arr.length);
-  for (let i = 0; i < result.length; i++) {
-    result[i] = arr[arr.length - 1 - i];
+  for (let i = 0; i < Math.floor(filteredLength / 2); i++) {
+    let tmp = n[i];
+    n[i] = n[filteredLength - 1 - i];
+    n[filteredLength - 1 - i] = tmp;
   }
-  console.log(result);
+  console.log(n);
 };
 
 filter([60, 6, 5, 4, 3, 2, 7, 7, 29, 1], s);
